@@ -1,14 +1,15 @@
 <?php
-//connecção ao banco de dados
+//conexão ao banco de dados
 
 $conn = new PDO("sqlite:carros.sqlite");
 $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
-$modelo = "Onix";
-$marca = "Chevrolet";
-$ano = 2023;
-$km = 1600;
-$km_litro = 19;
+//Criar no banco de dados
+$modelo = "Triton";
+$marca = "Mitsubishi";
+$ano = 2016;
+$km = 98000;
+$km_litro = 6;
 
 $preparo = $conn->prepare("INSERT INTO carros
     (modelo, marca, ano, km, km_por_litro)
@@ -20,7 +21,15 @@ $preparo->bindParam(":ano", $ano);
 $preparo->bindParam(":km", $km);
 $preparo->bindParam(":kmLitro", $km_litro);
 
+$preparo->execute();
 
+//Excluir do banco de dados
+
+$id_delete = 5;
+
+$preparo = $conn->prepare("DELETE FROM carros WHERE id=:id; ");
+$preparo->bindParam(":id", $id_delete);
+$preparo->execute();
 
 $q = $conn->query("SELECT * FROM carros;");
 $carros = $q->fetchAll();
