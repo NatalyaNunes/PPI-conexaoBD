@@ -46,7 +46,7 @@ $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
                 <td><?= $c->marca ?></td>
                 <td><?= $c->ano ?></td>
                 <td><?= $c->km ?></td>
-                <td><?= $c->kmLitro?></td>
+                <td><?= $c->km_por_litro?></td>
                 <td><a href="#" class="btn btn-primary">Editar</button> </td>
                 <td><button class="btn btn-danger">Excluir</button> </td>
             </tr>
