@@ -25,7 +25,7 @@ $preparo->bindParam(":kmLitro", $km_litro);
 
 //Excluir do banco de dados
 
-//$id_delete = 8;
+$id_delete = $_GET["id"];
 
 $preparo = $conn->prepare("DELETE FROM carros WHERE id=:id; ");
 $preparo->bindParam(":id", $id_delete);
@@ -34,8 +34,5 @@ $preparo->execute();
 $q = $conn->query("SELECT * FROM carros;");
 $carros = $q->fetchAll();
 
-echo("<pre>");
-print_r($carros);
-echo("</pre>");
-
+header("Location:../index.php");
 ?>

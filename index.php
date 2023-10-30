@@ -47,8 +47,8 @@ $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
                 <td><?= $c->ano ?></td>
                 <td><?= $c->km ?></td>
                 <td><?= $c->km_por_litro?></td>
-                <td><a href="#" class="btn btn-primary">Editar</button> </td>
-                <td><button class="btn btn-danger">Excluir</button> </td>
+                <td><a href="form.php?id=<?= $c->id ?>"  class="btn btn-primary">Editar</button> </td>
+                <td><a href="ws/salvar.php?id=<?= $c->id ?>"  class="btn btn-danger">Excluir</button> </td>
             </tr>
             <?php
             endforeach;

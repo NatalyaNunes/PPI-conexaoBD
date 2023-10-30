@@ -17,26 +17,43 @@
         </ul>
     </nav>
     <main>
+        <?php
+        $id=0;
+        $carro = null;
+        if(isset($_GET["id"])){
+            $id = $_GET["id"];
+            $conn = new PDO("sqlite:carros.sqlite");
+            $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+            $p = $conn->prepare("SELECT * FROM carros WHERE id = :id; ");
+            $p->bindParam(":id", $id);
+            $p->execute();
+            $carro = $p->fetch();
+        };
+
+        ?>
         <form action="ws/salvar.php" method="get" class="container">
+
+            <input type="hidden" name="id" value="<?= $id?>">
+
             <div class="form-group">                   
                 <label for="txtModelo">Modelo:</label>
-                <input class="form-control" type="text" name="modelo" id="txtModelo">
+                <input class="form-control" type="text" name="modelo" id="txtModelo" value="<?= is_null($carro)? '':$carro->modelo ?>">
             </div>
             <div class="form-group"> 
                 <label for="txtMarca">Marca:</label>
-                <input class="form-control" type="text" name="marca" id="txtMarca">
+                <input class="form-control" type="text" name="marca" id="txtMarca" value="<?= is_null($carro)? '':$carro->marca?>">
             </div>
             <div class="form-group"> 
                 <label for="numAno">Ano:</label>
-                <input class="form-control" type="number" name="ano" id="numAno">
+                <input class="form-control" type="number" name="ano" id="numAno" value="<?= is_null($carro)? '':$carro->ano?>">
             </div>
             <div class="form-group"> 
                 <label for="numKm">Km:</label>
-                <input class="form-control" type="number" name="km" id="numKm">
+                <input class="form-control" type="number" name="km" id="numKm" value="<?= $id==0? '':$carro->km?>"> 
             </div>
             <div class="form-group"> 
                 <label for="numKmLitro">Km por litro:</label>
-                <input class="form-control" type="number" name="kmLitro" id="numKmLitro">
+                <input class="form-control" type="number" name="kmLitro" id="numKmLitro" step="0.1" value="<?= is_null($carro)? '':$carro->km_por_litro?>">
             </div>
                 <input class="btn btn-success" type="submit" value="Cadastrar">
                 <a class="btn btn-secondary" href="index.php">Cancelar</a>
